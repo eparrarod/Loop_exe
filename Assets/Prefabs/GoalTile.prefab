@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1510932178216232440}
   - component: {fileID: 5699674893680252215}
   m_Layer: 0
-  m_Name: BlankTile
+  m_Name: GoalTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5835667111445530608, guid: 1346f5091875a435d9e443404ad7d3ef, type: 3}
+  m_Sprite: {fileID: 676775878450480739, guid: 1346f5091875a435d9e443404ad7d3ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
