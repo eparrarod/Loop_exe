@@ -19,7 +19,7 @@ public class GridManager : MonoBehaviour{
     [SerializeField]
     public GameObject[] characters; // robots
 
-    public GameObject character;
+    public GameObject robot;
 
     public int rows;
     public int columns;
@@ -119,8 +119,9 @@ public class GridManager : MonoBehaviour{
                         currentTile = Instantiate(tiles[2], position, Quaternion.identity, transform);
                         break;
                     case 'R':
-                        character = Instantiate(characters[0], position, Quaternion.identity, transform);
+                        robot = Instantiate(characters[0], position, Quaternion.identity, transform);
                         currentTile = Instantiate(tiles[0], position, Quaternion.identity, transform);
+                        robot.GetComponent<RobotMovement>().initBounds(rows, columns, new Vector2(x, y));
                         break;
                     default:
                         currentTile = Instantiate(tiles[0], position, Quaternion.identity, transform);
