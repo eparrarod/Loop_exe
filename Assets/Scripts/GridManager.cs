@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class GridManager : MonoBehaviour{
 
@@ -119,7 +120,7 @@ public class GridManager : MonoBehaviour{
                         currentTile = Instantiate(tiles[2], position, Quaternion.identity, transform);
                         break;
                     case 'R':
-                        robot = Instantiate(characters[0], position, Quaternion.identity, transform);
+                        StartCoroutine(CreateRobot(position));
                         currentTile = Instantiate(tiles[0], position, Quaternion.identity, transform);
                         robot.GetComponent<RobotMovement>().initBounds(rows, columns, new Vector2(x, y));
                         break;
@@ -131,6 +132,15 @@ public class GridManager : MonoBehaviour{
                 levelGrid[x, y] = currentTile;
             }
         }
+    }
+
+    IEnumerator CreateRobot(Vector3 pos) {
+        robot = Instantiate(characters[0], pos, Quaternion.identity, transform);
+
+        yield return new WaitUntil(() => robot.GetComponent<Transform>() != null);
+
+        // Now the object is ready
+        Debug.Log("Robot is fully initialized!");
     }
 
 }
