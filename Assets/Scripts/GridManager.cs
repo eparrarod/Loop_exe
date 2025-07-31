@@ -14,7 +14,12 @@ public class GridManager : MonoBehaviour{
     public char[,] mapEncoded; // Level as a char matrix
 
     [SerializeField]
-    public GameObject pivotPoint; // Backgorund of tile grid area
+    public GameObject pivotPoint; // Background of tile grid area
+
+    [SerializeField]
+    public GameObject[] characters; // robots
+
+    public GameObject character;
 
     public int rows;
     public int columns;
@@ -23,8 +28,15 @@ public class GridManager : MonoBehaviour{
 
     public GameObject[,] levelGrid;
 
+    // Scoring
+
+    public int targetCount;
+    public int targets;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
+        targetCount = 0;
+        targets = 0 ;
         createGrid();
     }
 
@@ -101,9 +113,14 @@ public class GridManager : MonoBehaviour{
                 switch (mapEncoded[x, y]) {
                     case 'G':
                         currentTile = Instantiate(tiles[1], position, Quaternion.identity, transform);
+                        targets++;
                         break;
                     case '#':
                         currentTile = Instantiate(tiles[2], position, Quaternion.identity, transform);
+                        break;
+                    case 'R':
+                        character = Instantiate(characters[0], position, Quaternion.identity, transform);
+                        currentTile = Instantiate(tiles[0], position, Quaternion.identity, transform);
                         break;
                     default:
                         currentTile = Instantiate(tiles[0], position, Quaternion.identity, transform);
