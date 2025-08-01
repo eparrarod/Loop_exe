@@ -1,34 +1,45 @@
 using UnityEngine;
 
-public class DragScript : MonoBehaviour{
+public class DragScript : MonoBehaviour {
 
-    bool dragging;
+    public bool dragable;
+    public bool dragging;
     public GameObject current;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start(){
-        dragging = false;
+    void Start() {
+        dragable = dragging = false;
     }
 
     // Update is called once per frame
-    void Update(){
+    void Update() {
 
-        // TODO: Detect and instantiate corresponding block
-        if (!dragging && Input.GetMouseButtonDown(0)) {
-            dragging = true;
-        }
-
-        //TODO add bounds so that it can only be dragged within the code area
+        ////TODO add bounds so that it can only be dragged within the code area
 
         if (dragging && Input.GetMouseButton(0)) {
             Vector3 goal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             goal.z = 0.0f;
-            current.transform.position = Vector3.MoveTowards(transform.position, goal, 0.1f);
+            current.transform.position = Vector3.MoveTowards(current.transform.position, goal, 0.1f);
         }
+
+        ////TODO add bounds so that if released outside code pen it dissapearss
 
         if (dragging && Input.GetMouseButtonUp(0)) {
             current = null;
             dragging = false;
         }
     }
+
+    //OnMouseDownOnly works for LeftClick
+    public void OnMouseDown() {
+        Debug.Log("OnMouseDown");
+        current = Instantiate(gameObject);
+        current.GetComponent<DragScript>().dragable = true;
+        dragging = true;
+    }
+
+    public void OnMouseDrag() {
+        
+    }
+
 }
