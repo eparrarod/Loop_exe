@@ -216,6 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 499942116}
   - component: {fileID: 499942117}
+  - component: {fileID: 499942118}
   m_Layer: 0
   m_Name: UIDocument
   m_TagString: Untagged
@@ -257,6 +258,18 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &499942118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499942115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ae3798a54774f51a9984ae33833a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +727,7 @@ MonoBehaviour:
   characters:
   - {fileID: 5036823624852324754, guid: 35ec258d6a2034e4fba15dd9cbae82c1, type: 3}
   robot: {fileID: 0}
+  duration: 2
   rows: 7
   columns: 7
   xSpacing: 0
@@ -1619,7 +1633,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c969788614e42b483ae26e396259a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 950388600}
   commands: []
   commandsRaw: []
   baseLine: {fileID: 1082379951}
@@ -1641,7 +1654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6768236373271565370, guid: 35ec258d6a2034e4fba15dd9cbae82c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8077228
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 6768236373271565370, guid: 35ec258d6a2034e4fba15dd9cbae82c1, type: 3}
       propertyPath: m_LocalPosition.z

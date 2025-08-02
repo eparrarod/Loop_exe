@@ -38,7 +38,7 @@ public class RobotMovement : MonoBehaviour{
 
         Debug.Log($"OldCoords {position}");
         Debug.Log($"conds [{position.y < rows - 1} , {position.y > 0}]");
-        if (position.y < rows - 1 && position.y > 0){
+        if (!(position.y == rows-1 && dir == 1 ) && !(position.y == 0 && dir== -1)){
             position.y = position.y + dir;
             valid = true;
         }
@@ -50,7 +50,7 @@ public class RobotMovement : MonoBehaviour{
         Debug.Log($"OldCoords {position}");
         Debug.Log($"conds [{position.y < cols - 1} , {position.y > 0}]");
 
-        if (position.x < cols - 1 && position.x > 0) {
+        if (!(position.x == cols - 1 && dir == 1) && !(position.x == 0 && dir == -1)) {
             position.x = position.x + dir;
         }
         Debug.Log($"NewCoords {position}");

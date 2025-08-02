@@ -24,6 +24,9 @@ public class GridManager : MonoBehaviour{
     public GameObject[] characters; // robots
 
     public GameObject robot;
+    public float duration = 1.0f; // time to traverse a single Tile
+    public float pause = 1.0f; // time in between Tile traversals
+
 
     public int rows;
     public int columns;
@@ -150,6 +153,10 @@ public class GridManager : MonoBehaviour{
     }
 
     public void execute(List<string> commands) {
+        StartCoroutine(executeAll(commands));
+    }
+
+    private IEnumerator executeAll(List<string> commands) {
 
         RobotMovement movement = robot.GetComponent<RobotMovement>();
         int repeatNextCommand = 1;
@@ -204,17 +211,32 @@ public class GridManager : MonoBehaviour{
                             break;
                     }
 
-                    //Debug.Log($"old pos {oldPos}");
-                    //Debug.Log($"RT {robot.transform.position}");
-                    Debug.Log($"moveN index {movement.position}");
-                    Vector3 newPos = pivot + new Vector3(movement.position.x * xSpacing, movement.position.y * ySpacing, 0);;
-                    //Debug.Log($"new pos {newPos}");
-                    robot.transform.position = newPos;
-                    //Debug.Log($"RTAf {robot.transform.position}");
+                    //Wait until each step finishes
+                    yield return StartCoroutine(executeSingle(movement));
                 }
             }
         }
     }
+
+    public IEnumerator executeSingle(RobotMovement movement) {
+        Debug.Log($"moveN index {movement.position}");
+        Vector3 newPos = pivot + new Vector3(movement.position.x * xSpacing, movement.position.y * ySpacing, 0); ;
+
+        float elapsed = 0f;
+
+        while (elapsed < duration) {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            robot.transform.position = Vector3.Lerp(robot.transform.position, newPos, t);
+            yield return null; // wait for next frame
+        }
+
+        robot.transform.position = newPos;
+        yield return null;// new WaitForSeconds(pause); // wait 0.5 seconds before next movement
+    }
+
 }
 
 
