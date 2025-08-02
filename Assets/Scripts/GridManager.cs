@@ -147,9 +147,6 @@ public class GridManager : MonoBehaviour{
         robot = Instantiate(characters[0], pos, Quaternion.identity, transform);
 
         yield return new WaitUntil(() => robot.GetComponent<Transform>() != null);
-
-        // Now the object is ready
-        Debug.Log("Robot is fully initialized!");
     }
 
     public void execute(List<string> commands) {
@@ -157,12 +154,11 @@ public class GridManager : MonoBehaviour{
     }
 
     private IEnumerator executeAll(List<string> commands) {
-
+        Debug.Log($"execute All! {commands.Count}");
         RobotMovement movement = robot.GetComponent<RobotMovement>();
         int repeatNextCommand = 1;
         foreach (string s in commands) {
             string[] pieces = s.Split(" ");
-            
 
             if (pieces.Length == 3) { // repeat with number
                 repeatNextCommand = int.Parse(pieces[1]);
@@ -182,7 +178,6 @@ public class GridManager : MonoBehaviour{
 
                     switch (s) {
                         case "moveUp();":
-                            Debug.Log($"up");
                             movement.moveUp();
                             break;
                         case "moveNE();":
@@ -195,7 +190,6 @@ public class GridManager : MonoBehaviour{
                             movement.moveDiagonal(1);
                             break;
                         case "moveDown();":
-                            Debug.Log($"down");
                             movement.moveDown();
                             break;
                         case "moveSW();":
@@ -256,7 +250,4 @@ public class GridManager : MonoBehaviour{
         robot.transform.position = newPos;
         yield return null;// new WaitForSeconds(pause); // wait 0.5 seconds before next movement
     }
-
 }
-
-

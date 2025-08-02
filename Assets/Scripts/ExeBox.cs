@@ -4,6 +4,7 @@ using TMPro;
 
 public class ExeBox : MonoBehaviour {
 
+    [SerializeField]
     public static ExeBox singleton;
 
     [SerializeField]
@@ -19,7 +20,7 @@ public class ExeBox : MonoBehaviour {
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
-
+        Debug.Log("Call to Start in EXEBox");
         if(singleton == null) {
             singleton = this;
         }
@@ -48,7 +49,6 @@ public class ExeBox : MonoBehaviour {
     }
 
     public void addCommand(string type) {
-
         Debug.Log($"T {type}");
         string commandFull = commandMap.GetValueOrDefault(type, $"{type} times");
         // Add Number to the right of repeat

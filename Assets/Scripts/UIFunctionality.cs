@@ -13,7 +13,7 @@ public class UIFunctionality : MonoBehaviour{
     }
 
     void OnClick() {
-        Debug.Log("Clicked!");
+        //Debug.Log($"Clicked!{ExeBox.singleton.commandsRaw.Count}");
         GridManager.singleton.execute(ExeBox.singleton.commandsRaw);
     }
 }
