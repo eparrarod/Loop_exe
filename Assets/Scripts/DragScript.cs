@@ -44,7 +44,6 @@ public class DragScript : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log($"Trigger Enter {other.tag} [{other.CompareTag("Queue")}]");
         if (other.CompareTag("Queue")) {
             queueArea = other.gameObject;
             isOverQueueArea = true;
@@ -52,7 +51,6 @@ public class DragScript : MonoBehaviour {
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        Debug.Log($"Trigger Exit {other.tag}");
         if (other.CompareTag("Queue")) {
             isOverQueueArea = false;
         }
