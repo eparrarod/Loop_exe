@@ -186,7 +186,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7824976452296843936}
   - component: {fileID: 5152249819763717858}
-  - component: {fileID: 1959792383060155611}
   m_Layer: 0
   m_Name: CommandLine
   m_TagString: Untagged
@@ -265,18 +264,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1959792383060155611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7064592135293576622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c969788614e42b483ae26e396259a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  commands: []
-  commandsRaw: []
-  baseLine: {fileID: 7064592135293576622}

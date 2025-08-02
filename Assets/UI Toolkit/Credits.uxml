@@ -1,0 +1,6 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/credit.uss?fileID=7433441132597879392&amp;guid=b13228935fd414300a8ecbf81f775f8f&amp;type=3#credit" />
+    <engine:VisualElement style="flex-grow: 1; right: 2%; flex-direction: column;">
+        <engine:Label text="&quot;Beauty Flow&quot; Kevin MacLeod (incompetech.com)&#10;Licensed under Creative Commons: By Attribution 4.0 License&#10;http://creativecommons.org/licenses/by/4.0/" class="credit" style="left: 3%; right: -11px; top: 3%; align-items: stretch; height: 420px; flex-wrap: wrap; white-space: normal; font-size: 13%;" />
+    </engine:VisualElement>
+</engine:UXML>
