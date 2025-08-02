@@ -221,13 +221,19 @@ public class GridManager : MonoBehaviour{
 
     public bool checkPosition(Vector2Int pos) {
         bool valid = true;
+
         switch (mapEncoded[pos.x, pos.y]) {
-            case '#':
-                valid = false;
-                break;
-            case 'G':
-                targetsReached++;
-                break;
+                case '#':
+                    valid = false;
+                    break;
+                case 'G':
+                    targetsReached++;
+                    mapEncoded[pos.x, pos.y] = '.';
+                    // Todo: Replace Tile in UI
+                    Vector3 position = pivot + new Vector3(pos.x * xSpacing, pos.y * ySpacing, 0);
+                    Destroy(levelGrid[pos.x, pos.y]);
+                    levelGrid[pos.x, pos.y] = Instantiate(tiles[0], position, Quaternion.identity, transform);
+                    break;
         }
         return valid;
     }
