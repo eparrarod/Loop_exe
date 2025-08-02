@@ -37,8 +37,8 @@ public class GridManager : MonoBehaviour{
 
     // Scoring
 
-    public int targetCount;
-    public int targets;
+    public int targetCount; // Targets in Map
+    public int targetsReached; // Targets Reached in Map
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
@@ -46,7 +46,7 @@ public class GridManager : MonoBehaviour{
             singleton = this;
         }
         targetCount = 0;
-        targets = 0 ;
+        targetsReached = 0 ;
         createGrid();
     }
 
@@ -92,7 +92,7 @@ public class GridManager : MonoBehaviour{
                 float totalw = rows * xSpacing;
                 float totalh = rows * ySpacing;
 
-                // compute space available
+                // Compute space available
 
                 //Vector2 sizeBgk = pivotPoint.GetComponent<SpriteRenderer>().size;
                 //float scaleBkg = pivotPoint.GetComponent<Transform>().localScale.x;
@@ -123,7 +123,7 @@ public class GridManager : MonoBehaviour{
                 switch (mapEncoded[x, y]) {
                     case 'G':
                         currentTile = Instantiate(tiles[1], position, Quaternion.identity, transform);
-                        targets++;
+                        targetCount++;
                         break;
                     case '#':
                         currentTile = Instantiate(tiles[2], position, Quaternion.identity, transform);
@@ -176,7 +176,7 @@ public class GridManager : MonoBehaviour{
 
                     //Get Current robot
                     //levelGrid[movement.position.x, movement.position.y];
-                    Vector3 oldPos = new Vector3(movement.position.x * xSpacing, movement.position.y * ySpacing, 0);
+                    Vector2Int oldPos = movement.position;
 
                     Debug.Log($"moveO index {movement.position}");
 
@@ -211,11 +211,31 @@ public class GridManager : MonoBehaviour{
                             break;
                     }
 
-                    //Wait until each step finishes
-                    yield return StartCoroutine(executeSingle(movement));
+                    if (checkPosition(movement.position)) {
+                        // Make the step Wait until each step finishes
+                        yield return StartCoroutine(executeSingle(movement));
+                    } else {
+                        // Resset position to previous
+                        Debug.Log("Wall cannot move");
+                        movement.position = oldPos;
+                    }
+                    
                 }
             }
         }
+    }
+
+    public bool checkPosition(Vector2Int pos) {
+        bool valid = true;
+        switch (mapEncoded[pos.x, pos.y]) {
+            case '#':
+                valid = false;
+                break;
+            case 'G':
+                targetsReached++;
+                break;
+        }
+        return valid;
     }
 
     public IEnumerator executeSingle(RobotMovement movement) {
