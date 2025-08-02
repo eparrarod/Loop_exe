@@ -186,11 +186,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6595401776332276418}
   - component: {fileID: 7299613861973803013}
-  - component: {fileID: 7824021131408815625}
   - component: {fileID: 6325838707039973638}
+  - component: {fileID: 2161490444736596994}
   - component: {fileID: 6405658623260220686}
   m_Layer: 0
-  m_Name: CommandBlock
+  m_Name: ButtonC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,20 +267,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7824021131408815625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1583108514055436740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 953d10f98e1be46038b0b8f70e8c5306, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dragging: 0
-  isOverQueueArea: 0
 --- !u!114 &6325838707039973638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +279,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7806f3280cf4e4baa23116ba8fc7b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 
+  type: Repeat
+--- !u!114 &2161490444736596994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583108514055436740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70288506bd69d479ba035cc5f6f1f15b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commandBox: {fileID: 1583108514055436740, guid: 3b45d2cdae867468f81887f01bd27cea, type: 3}
 --- !u!70 &6405658623260220686
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

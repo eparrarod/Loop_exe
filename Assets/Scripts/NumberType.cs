@@ -4,13 +4,11 @@ using TMPro;
 public class NumberType : CommandType{
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    private int number;
+    public int number = 1;
 
     void Start(){
+        base.type = "" + number;
         base.Start();
-        number = 1;
-        type = "" + number;
-        
     }
 
     // Update is called once per frame
@@ -29,8 +27,12 @@ public class NumberType : CommandType{
 
     private void cycleNumber() {
         number = (number + 1) % 10;
-        type = "" + number;
+        base.type = "" + number;
         TMP_Text textLabel = GetComponentInChildren<TMP_Text>();
         textLabel.text = type;
+    }
+
+    public void setNum(int num) {
+        number = num;
     }
 }

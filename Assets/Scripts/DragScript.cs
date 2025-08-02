@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class DragScript : MonoBehaviour {
 
-    public bool dragable;
     public bool dragging;
-    public GameObject current;
-
+    private Vector3 goal;
+    public bool isOverQueueArea;
+    public GameObject queueArea;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
-        dragable = dragging = false;
+        // Give it some transparency
+        setTransparency(0.5f);
     }
 
     // Update is called once per frame
@@ -17,28 +18,50 @@ public class DragScript : MonoBehaviour {
         ////TODO add bounds so that it can only be dragged within the code area
 
         if (dragging && Input.GetMouseButton(0)) {
-            Vector3 goal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            goal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             goal.z = 0.0f;
-            current.transform.position = Vector3.MoveTowards(current.transform.position, goal, 0.1f);
+            transform.position = Vector3.MoveTowards(transform.position, goal, 0.1f);
         }
 
-        ////TODO add bounds so that if released outside code pen it dissapearss
-
+        
+        //Release logic
         if (dragging && Input.GetMouseButtonUp(0)) {
-            current = null;
+
+            //Add to Queue
+            if (isOverQueueArea) {
+                CommandType ct = GetComponent<CommandType>();
+                Debug.Log($"DT: {GetComponent<CommandType>().type}");
+                queueArea.GetComponent<Queue>().addCommand(GetComponent<CommandType>().type);
+            }
+
+            // Undo transparency
+            setTransparency(1.0f);
             dragging = false;
+
+            
+            Destroy(gameObject);
         }
     }
 
-    //OnMouseDownOnly works for LeftClick
-    public void OnMouseDown() {
-        Debug.Log("OnMouseDown");
-        current = Instantiate(gameObject);
-        current.GetComponent<DragScript>().dragable = true;
-        dragging = true;
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log($"Trigger Enter {other.tag} [{other.CompareTag("Queue")}]");
+        if (other.CompareTag("Queue")) {
+            queueArea = other.gameObject;
+            isOverQueueArea = true;
+        }
     }
 
-    public void OnMouseDrag() {
+    private void OnTriggerExit2D(Collider2D other) {
+        Debug.Log($"Trigger Exit {other.tag}");
+        if (other.CompareTag("Queue")) {
+            isOverQueueArea = false;
+        }
+    }
+
+    private void setTransparency(float value) {
+        Color baseC = GetComponent<SpriteRenderer>().color;
+        baseC.a = value;
+        GetComponent<SpriteRenderer>().color = baseC;
         
     }
 
