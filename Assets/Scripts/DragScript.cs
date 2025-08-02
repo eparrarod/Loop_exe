@@ -31,7 +31,7 @@ public class DragScript : MonoBehaviour {
             if (isOverQueueArea) {
                 CommandType ct = GetComponent<CommandType>();
                 Debug.Log($"DT: {GetComponent<CommandType>().type}");
-                queueArea.GetComponent<Queue>().addCommand(GetComponent<CommandType>().type);
+                queueArea.GetComponent<ExeBox>().addCommand(GetComponent<CommandType>().type);
             }
 
             // Undo transparency

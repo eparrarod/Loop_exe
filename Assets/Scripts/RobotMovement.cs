@@ -1,10 +1,12 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class RobotMovement : MonoBehaviour{
 
-    private Vector2 position;
+    public Vector2Int position;
     private int rows;
     private int cols;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
         
@@ -19,45 +21,55 @@ public class RobotMovement : MonoBehaviour{
         return position;
     }
 
-    public void initBounds(int r, int c, Vector2 pos) {
-        rows = r - 1;
-        cols = c - 1;
+    public void initBounds(int r, int c, Vector2Int pos) {
+        rows = r;
+        cols = c;
         setPosition(pos);
     }
 
-    public void setPosition(Vector2 pos) {
+    public void setPosition(Vector2Int pos) {
         position = pos;
     }
 
 
 
-    private void moveVertical(int dir) {
-        if (position.y < rows && position.y > 0){
+    private bool moveVertical(int dir) {
+        bool valid = false;
+
+        Debug.Log($"OldCoords {position}");
+        Debug.Log($"conds [{position.y < rows - 1} , {position.y > 0}]");
+        if (position.y < rows - 1 && position.y > 0){
             position.y = position.y + dir;
+            valid = true;
         }
+        Debug.Log($"NewCoords {position}");
+        return valid;
     }
 
     private void moveHorizontal(int dir) {
-        if (position.x < cols && position.x > 0) {
+        Debug.Log($"OldCoords {position}");
+        Debug.Log($"conds [{position.y < cols - 1} , {position.y > 0}]");
+
+        if (position.x < cols - 1 && position.x > 0) {
             position.x = position.x + dir;
         }
+        Debug.Log($"NewCoords {position}");
     }
 
     public void moveLeft() {
         moveHorizontal(-1);
-
     }
 
     public void moveRight() {
         moveHorizontal(1);
     }
 
-    public void moveUp() {
-        moveVertical(-1);
+    public bool moveUp() {
+       return moveVertical(1);
     }
 
-    public void moveDown() {
-        moveVertical(1);
+    public bool moveDown() {
+        return moveVertical(-1);
     }
 
     public void moveDiagonal(int dir) {
@@ -65,13 +77,13 @@ public class RobotMovement : MonoBehaviour{
 
         switch (dir) {
             case 0: //NE
-                if (position.y < rows && position.x > 0) {
+                if (position.y < rows - 1 && position.x > 0) {
                     position.x = position.x - 1;
                     position.y = position.y + 1;
                 }
                 break;
             case 1: //SE
-                if (position.x < cols && position.y > 0) {
+                if (position.x < cols - 1 && position.y > 0) {
                     position.x = position.x + 1;
                     position.y = position.y - 1;
                 }
@@ -83,7 +95,7 @@ public class RobotMovement : MonoBehaviour{
                 }
                 break;
             case 3: //NW
-                if (position.y < rows && position.x > 0) {
+                if (position.y < rows - 1 && position.x > 0) {
                     position.x = position.x - 1;
                     position.y = position.y + 1;
                 }
@@ -91,6 +103,4 @@ public class RobotMovement : MonoBehaviour{
         }
 
     }
-
-
 }

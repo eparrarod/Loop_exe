@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 
-public class Queue : MonoBehaviour{
+public class ExeBox : MonoBehaviour {
+
+    public static ExeBox singleton;
 
     [SerializeField]
     public List<GameObject> commands;
@@ -16,7 +18,11 @@ public class Queue : MonoBehaviour{
     float heightPerLine;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start(){
+    void Start() {
+
+        if(singleton == null) {
+            singleton = this;
+        }
 
         commandMap = new Dictionary<string, string>();
         commandMap.Add("Repeat", "Repeat");
@@ -38,7 +44,7 @@ public class Queue : MonoBehaviour{
     }
 
     // Update is called once per frame
-    void Update(){
+    void Update() {
     }
 
     public void addCommand(string type) {
@@ -47,27 +53,27 @@ public class Queue : MonoBehaviour{
         string commandFull = commandMap.GetValueOrDefault(type, $"{type} times");
         // Add Number to the right of repeat
         bool number = int.TryParse(type, out int result);
-        if (number && commandsRaw.Count > 0 ) {
+        if (number && commandsRaw.Count > 0) {
             Debug.Log($"Update Repeat {commandFull}");
             string lastCommand = commandsRaw[commandsRaw.Count - 1];
             if (lastCommand.Equals("Repeat")) {
                 commandFull = $"Repeat {commandFull}";
                 commandsRaw.RemoveAt(commandsRaw.Count - 1);
-                GameObject lastCommandLine = commands[commands.Count-1];
+                GameObject lastCommandLine = commands[commands.Count - 1];
                 commands.RemoveAt(commands.Count - 1);
                 lastCommandLine.GetComponentInChildren<TMP_Text>().text = commandFull;
                 commands.Add(lastCommandLine);
             } else {// The last command is not a repeat command
                 number = false;
             }
-        }else { //A number but empty queue
+        } else { //A number but empty queue
             number = false;
         }
 
-        if (!number){
+        if (!number) {
             Debug.Log("New line");
             Vector3 position = baseLine.transform.position;
-            position.y = position.y - ( heightPerLine * (commandsRaw.Count+1));
+            position.y = position.y - (heightPerLine * (commandsRaw.Count + 1));
             GameObject newCommandLine = Instantiate(baseLine, transform);
             newCommandLine.transform.position = position;
             newCommandLine.GetComponentInChildren<TMP_Text>().text = commandFull;
@@ -75,4 +81,5 @@ public class Queue : MonoBehaviour{
         }
         commandsRaw.Add(commandFull);
     }
+
 }

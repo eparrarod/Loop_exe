@@ -102,7 +102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: text
+  m_text: public void Loop{
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -136,8 +136,8 @@ MonoBehaviour:
   m_fontSizeMin: 0
   m_fontSizeMax: 50
   m_fontStyle: 0
-  m_HorizontalAlignment: 8
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 8192
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -186,6 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7824976452296843936}
   - component: {fileID: 5152249819763717858}
+  - component: {fileID: 1959792383060155611}
   m_Layer: 0
   m_Name: CommandLine
   m_TagString: Untagged
@@ -203,7 +204,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9241913, y: 0.10146402, z: 1}
+  m_LocalScale: {x: 0.94307584, y: 0.06251423, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3860811266847791634}
@@ -264,3 +265,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1959792383060155611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7064592135293576622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c969788614e42b483ae26e396259a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commands: []
+  commandsRaw: []
+  baseLine: {fileID: 7064592135293576622}

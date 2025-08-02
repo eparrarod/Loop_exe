@@ -4,6 +4,8 @@ using System.Collections;
 
 public class GridManager : MonoBehaviour{
 
+    public static GridManager singleton;
+
     [SerializeField]
     public GameObject[] tiles; //list of tiles
 
@@ -16,6 +18,7 @@ public class GridManager : MonoBehaviour{
 
     [SerializeField]
     public GameObject pivotPoint; // Background of tile grid area
+    Vector3 pivot; // pivot for calculating Tile positions
 
     [SerializeField]
     public GameObject[] characters; // robots
@@ -36,6 +39,9 @@ public class GridManager : MonoBehaviour{
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
+        if (singleton == null) {
+            singleton = this;
+        }
         targetCount = 0;
         targets = 0 ;
         createGrid();
@@ -78,7 +84,7 @@ public class GridManager : MonoBehaviour{
         // Instantiate all the dice in the UI
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < columns; x++) {
-                Vector3 pivot = pivotPoint.transform.position;
+                pivot = pivotPoint.transform.position;
 
                 float totalw = rows * xSpacing;
                 float totalh = rows * ySpacing;
@@ -107,7 +113,7 @@ public class GridManager : MonoBehaviour{
                 pivot[1] = pivot[1] - (totalh / 2);
 
                 Vector3 position = pivot + new Vector3(x * xSpacing, y * ySpacing, 0);
-                Debug.Log(position);
+                Debug.Log($"[{x},{y}] -> {position}");
 
                 GameObject currentTile;
 
@@ -122,7 +128,7 @@ public class GridManager : MonoBehaviour{
                     case 'R':
                         StartCoroutine(CreateRobot(position));
                         currentTile = Instantiate(tiles[0], position, Quaternion.identity, transform);
-                        robot.GetComponent<RobotMovement>().initBounds(rows, columns, new Vector2(x, y));
+                        robot.GetComponent<RobotMovement>().initBounds(rows, columns, new Vector2Int(x, y));
                         break;
                     default:
                         currentTile = Instantiate(tiles[0], position, Quaternion.identity, transform);
@@ -143,6 +149,72 @@ public class GridManager : MonoBehaviour{
         Debug.Log("Robot is fully initialized!");
     }
 
+    public void execute(List<string> commands) {
+
+        RobotMovement movement = robot.GetComponent<RobotMovement>();
+        int repeatNextCommand = 1;
+        foreach (string s in commands) {
+            string[] pieces = s.Split(" ");
+            
+
+            if (pieces.Length == 3) { // repeat with number
+                repeatNextCommand = int.Parse(pieces[1]);
+            } else if (pieces.Length == 2) { // number only
+                // Todo: Robot eyes blink that amount of times
+
+            } else { // A direction or a repeat without number
+                for (int i = 0 ; i < repeatNextCommand; i++) {
+
+                    Debug.Log($"-> {s} }} {i+1}/{repeatNextCommand}");
+
+                    //Get Current robot
+                    //levelGrid[movement.position.x, movement.position.y];
+                    Vector3 oldPos = new Vector3(movement.position.x * xSpacing, movement.position.y * ySpacing, 0);
+
+                    Debug.Log($"moveO index {movement.position}");
+
+                    switch (s) {
+                        case "moveUp();":
+                            Debug.Log($"up");
+                            movement.moveUp();
+                            break;
+                        case "moveNE();":
+                            movement.moveDiagonal(0);
+                            break;
+                        case "moveRight();":
+                            movement.moveRight();
+                            break;
+                        case "moveSE();":
+                            movement.moveDiagonal(1);
+                            break;
+                        case "moveDown();":
+                            Debug.Log($"down");
+                            movement.moveDown();
+                            break;
+                        case "moveSW();":
+                            movement.moveDiagonal(2);
+                            break;
+                        case "moveLeft();":
+                            movement.moveLeft();
+                            break;
+                        case "moveNW();":
+                            movement.moveDiagonal(3);
+                            break;
+                        case "Repeat" :
+                            break;
+                    }
+
+                    //Debug.Log($"old pos {oldPos}");
+                    //Debug.Log($"RT {robot.transform.position}");
+                    Debug.Log($"moveN index {movement.position}");
+                    Vector3 newPos = pivot + new Vector3(movement.position.x * xSpacing, movement.position.y * ySpacing, 0);;
+                    //Debug.Log($"new pos {newPos}");
+                    robot.transform.position = newPos;
+                    //Debug.Log($"RTAf {robot.transform.position}");
+                }
+            }
+        }
+    }
 }
 
 
