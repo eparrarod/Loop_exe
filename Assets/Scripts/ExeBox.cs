@@ -20,7 +20,6 @@ public class ExeBox : MonoBehaviour {
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
-        Debug.Log("Call to Start in EXEBox");
         if(singleton == null) {
             singleton = this;
         }
@@ -49,12 +48,10 @@ public class ExeBox : MonoBehaviour {
     }
 
     public void addCommand(string type) {
-        Debug.Log($"T {type}");
         string commandFull = commandMap.GetValueOrDefault(type, $"{type} times");
         // Add Number to the right of repeat
         bool number = int.TryParse(type, out int result);
         if (number && commandsRaw.Count > 0) {
-            Debug.Log($"Update Repeat {commandFull}");
             string lastCommand = commandsRaw[commandsRaw.Count - 1];
             if (lastCommand.Equals("Repeat")) {
                 commandFull = $"Repeat {commandFull}";
@@ -71,7 +68,6 @@ public class ExeBox : MonoBehaviour {
         }
 
         if (!number) {
-            Debug.Log("New line");
             Vector3 position = baseLine.transform.position;
             position.y = position.y - (heightPerLine * (commandsRaw.Count + 1));
             GameObject newCommandLine = Instantiate(baseLine, transform);
@@ -80,6 +76,14 @@ public class ExeBox : MonoBehaviour {
             commands.Add(newCommandLine);
         }
         commandsRaw.Add(commandFull);
+    }
+
+    public void clearQueue() {
+        commandsRaw = new List<string>();
+        foreach (GameObject line in commands) {
+            Destroy(line);
+        }
+        commands = new List<GameObject>();
     }
 
 }

@@ -9,11 +9,18 @@ public class UIFunctionality : MonoBehaviour{
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
         Button runButton = root.Q<Button>("RunButton");
-        runButton.clicked += OnClick;
+        runButton.clicked += OnRunClick;
+        Button clearButton = root.Q<Button>("ClearButton");
+        clearButton.clicked += OnClearClick;
     }
 
-    void OnClick() {
-        //Debug.Log($"Clicked!{ExeBox.singleton.commandsRaw.Count}");
+    void OnRunClick() {
+        Debug.Log($"Clicked!{ExeBox.singleton.commandsRaw.Count}");
         GridManager.singleton.execute(ExeBox.singleton.commandsRaw);
+    }
+
+    void OnClearClick() {
+        Debug.Log($"Clicked! Clear");
+        ExeBox.singleton.clearQueue();
     }
 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class RobotMovement : MonoBehaviour{
 
@@ -30,8 +29,6 @@ public class RobotMovement : MonoBehaviour{
     public void setPosition(Vector2Int pos) {
         position = pos;
     }
-
-
 
     private bool moveVertical(int dir) {
         bool valid = false;
@@ -77,24 +74,30 @@ public class RobotMovement : MonoBehaviour{
 
         switch (dir) {
             case 0: //NE
+                Debug.Log("NE");
+                Debug.Log($"BIpos -;{position}");
                 if (position.y < rows - 1 && position.x > 0) {
-                    position.x = position.x - 1;
+                    position.x = position.x + 1;
                     position.y = position.y + 1;
                 }
+                Debug.Log($"AIpos -;{position}");
                 break;
             case 1: //SE
+                Debug.Log("SE");
                 if (position.x < cols - 1 && position.y > 0) {
                     position.x = position.x + 1;
                     position.y = position.y - 1;
                 }
                 break;
             case 2: //SW
+                Debug.Log("SW");
                 if (position.y > 0 && position.x > 0) {
                     position.x = position.x - 1;
                     position.y = position.y - 1;
                 }
                 break;
             case 3: //NW
+                Debug.Log("NW");
                 if (position.y < rows - 1 && position.x > 0) {
                     position.x = position.x - 1;
                     position.y = position.y + 1;
