@@ -26,18 +26,19 @@ public class UIFunctionality : MonoBehaviour{
         Button clearButton = root.Q<Button>("ClearButton");
         clearButton.clicked += OnClearClick;
 
-    //    SetFillColor(Color.green);
-    //    SetFillColor(Color.green);
+        //Color c = new Color(254, 91, 239);
+        //SetFillColor(c);
+        //SetBackgroundColor(Color.green);
     }
 
-    //public void SetFillColor(Color color) {
-    //    var actualBar = goals.Q(className: "unity-progress-bar__progress");
-    //    actualBar.style.backgroundColor = new StyleColor(color);
-    //}
+    public void SetFillColor(Color color) {
+        var actualBar = goals.Q(className: "unity-progress-bar__progress");
+        actualBar.style.backgroundColor = new StyleColor(color);
+    }
 
-    //public void SetBackgroundColor(Color color) {
-    //    goals.style.backgroundColor = new StyleColor(color);
-    //}
+    public void SetBackgroundColor(Color color) {
+        goals.style.backgroundColor = new StyleColor(color);
+    }
 
     void OnRunClick() {
         Debug.Log($"Clicked!{ExeBox.singleton.commandsRaw.Count}");
