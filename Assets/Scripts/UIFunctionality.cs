@@ -3,8 +3,6 @@ using UnityEngine.UIElements;
 
 public class UIFunctionality : MonoBehaviour{
 
-    /// UI related functionality
-
     private ProgressBar goals;
     void Start() {
 
@@ -25,19 +23,6 @@ public class UIFunctionality : MonoBehaviour{
         runButton.clicked += OnRunClick;
         Button clearButton = root.Q<Button>("ClearButton");
         clearButton.clicked += OnClearClick;
-
-        //Color c = new Color(254, 91, 239);
-        //SetFillColor(c);
-        //SetBackgroundColor(Color.green);
-    }
-
-    public void SetFillColor(Color color) {
-        var actualBar = goals.Q(className: "unity-progress-bar__progress");
-        actualBar.style.backgroundColor = new StyleColor(color);
-    }
-
-    public void SetBackgroundColor(Color color) {
-        goals.style.backgroundColor = new StyleColor(color);
     }
 
     void OnRunClick() {

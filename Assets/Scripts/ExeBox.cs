@@ -20,7 +20,7 @@ public class ExeBox : MonoBehaviour {
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
-        if(singleton == null) {
+        if (singleton == null) {
             singleton = this;
         }
 
@@ -48,34 +48,36 @@ public class ExeBox : MonoBehaviour {
     }
 
     public void addCommand(string type) {
-        string commandFull = commandMap.GetValueOrDefault(type, $"{type} times");
-        // Add Number to the right of repeat
-        bool number = int.TryParse(type, out int result);
-        if (number && commandsRaw.Count > 0) {
-            string lastCommand = commandsRaw[commandsRaw.Count - 1];
-            if (lastCommand.Equals("Repeat")) {
-                commandFull = $"Repeat {commandFull}";
-                commandsRaw.RemoveAt(commandsRaw.Count - 1);
-                GameObject lastCommandLine = commands[commands.Count - 1];
-                commands.RemoveAt(commands.Count - 1);
-                lastCommandLine.GetComponentInChildren<TMP_Text>().text = commandFull;
-                commands.Add(lastCommandLine);
-            } else {// The last command is not a repeat command
+        if (commandsRaw.Count < 15) {
+            string commandFull = commandMap.GetValueOrDefault(type, $"{type} times");
+            // Add Number to the right of repeat
+            bool number = int.TryParse(type, out int result);
+            if (number && commandsRaw.Count > 0) {
+                string lastCommand = commandsRaw[commandsRaw.Count - 1];
+                if (lastCommand.Equals("Repeat")) {
+                    commandFull = $"Repeat {commandFull}";
+                    commandsRaw.RemoveAt(commandsRaw.Count - 1);
+                    GameObject lastCommandLine = commands[commands.Count - 1];
+                    commands.RemoveAt(commands.Count - 1);
+                    lastCommandLine.GetComponentInChildren<TMP_Text>().text = commandFull;
+                    commands.Add(lastCommandLine);
+                } else {// The last command is not a repeat command
+                    number = false;
+                }
+            } else { //A number but empty queue
                 number = false;
             }
-        } else { //A number but empty queue
-            number = false;
-        }
 
-        if (!number) {
-            Vector3 position = baseLine.transform.position;
-            position.y = position.y - (heightPerLine * (commandsRaw.Count + 1));
-            GameObject newCommandLine = Instantiate(baseLine, transform);
-            newCommandLine.transform.position = position;
-            newCommandLine.GetComponentInChildren<TMP_Text>().text = commandFull;
-            commands.Add(newCommandLine);
+            if (!number) {
+                Vector3 position = baseLine.transform.position;
+                position.y = position.y - (heightPerLine * (commandsRaw.Count + 1));
+                GameObject newCommandLine = Instantiate(baseLine, transform);
+                newCommandLine.transform.position = position;
+                newCommandLine.GetComponentInChildren<TMP_Text>().text = commandFull;
+                commands.Add(newCommandLine);
+            }
+            commandsRaw.Add(commandFull);
         }
-        commandsRaw.Add(commandFull);
     }
 
     public void clearQueue() {
