@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class UIFunctionality : MonoBehaviour{
 
     private ProgressBar goals;
     void Start() {
-
     }
 
     void Update() {
@@ -27,6 +27,7 @@ public class UIFunctionality : MonoBehaviour{
 
     void OnRunClick() {
         Debug.Log($"Clicked!{ExeBox.singleton.commandsRaw.Count}");
+        ExeBox.singleton.closeLoop();
         GridManager.singleton.execute(ExeBox.singleton.commandsRaw);
     }
 
