@@ -27,7 +27,6 @@ public class GridManager : MonoBehaviour{
     public float duration = 1.0f; // time to traverse a single Tile
     public float pause = 1.0f; // time in between Tile traversals
 
-
     public int rows;
     public int columns;
     public float xSpacing = 0.0f;
@@ -50,14 +49,8 @@ public class GridManager : MonoBehaviour{
         createGrid();
     }
 
-    // Update is called once per frame
-    void Update(){
-        //Debug.Log("update");
-    }
-
     // Create Grid
     void createGrid() {
-
         tileMap = new Dictionary<char, GameObject>();
         for (int i = 0; i < tiles.Length; i++) {
             tileMap.Add(chars[i], tiles[i]);
@@ -78,7 +71,6 @@ public class GridManager : MonoBehaviour{
         // Get size of tile prefab
         Vector2 dimensions = tiles[0].GetComponent<SpriteRenderer>().size;
         float scale = tiles[0].GetComponent<Transform>().localScale.x;
-        Debug.Log($"Prefab size: {dimensions}");
         xSpacing = (dimensions[0] - 0.02f) * scale;
         ySpacing = (dimensions[1] - 0.02f) * scale;
 
@@ -110,13 +102,12 @@ public class GridManager : MonoBehaviour{
                 //xSpacing = xSpacing * scale;
                 //ySpacing = ySpacing * scale;
 
-
                 // center within the center of the background of the GridArea
                 pivot[0] = pivot[0] - (totalw / 2);
                 pivot[1] = pivot[1] - (totalh / 2);
 
                 Vector3 position = pivot + new Vector3(x * xSpacing, y * ySpacing, 0);
-                Debug.Log($"[{x},{y}] -> {position}");
+                //Debug.Log($"[{x},{y}] -> {position}");
 
                 GameObject currentTile;
 
@@ -137,7 +128,6 @@ public class GridManager : MonoBehaviour{
                         currentTile = Instantiate(tiles[0], position, Quaternion.identity, transform);
                         break;
                 }
-
                 levelGrid[x, y] = currentTile;
             }
         }
@@ -145,7 +135,6 @@ public class GridManager : MonoBehaviour{
 
     IEnumerator CreateRobot(Vector3 pos) {
         robot = Instantiate(characters[0], pos, Quaternion.identity, transform);
-
         yield return new WaitUntil(() => robot.GetComponent<Transform>() != null);
     }
 
@@ -154,7 +143,6 @@ public class GridManager : MonoBehaviour{
     }
 
     private IEnumerator executeAll(List<string> commands) {
-        Debug.Log($"execute All! {commands.Count}");
         RobotMovement movement = robot.GetComponent<RobotMovement>();
         int repeatNextCommand = 1;
         foreach (string s in commands) {
@@ -167,14 +155,7 @@ public class GridManager : MonoBehaviour{
 
             } else { // A direction or a repeat without number
                 for (int i = 0 ; i < repeatNextCommand; i++) {
-
-                    Debug.Log($"-> {s} }} {i+1}/{repeatNextCommand}");
-
-                    //Get Current robot
-                    //levelGrid[movement.position.x, movement.position.y];
                     Vector2Int oldPos = movement.position;
-
-                    Debug.Log($"moveO index {movement.position}");
 
                     switch (s) {
                         case "moveUp();":
@@ -239,7 +220,6 @@ public class GridManager : MonoBehaviour{
     }
 
     public IEnumerator executeSingle(RobotMovement movement) {
-        Debug.Log($"moveN index {movement.position}");
         Vector3 newPos = pivot + new Vector3(movement.position.x * xSpacing, movement.position.y * ySpacing, 0); ;
 
         float elapsed = 0f;

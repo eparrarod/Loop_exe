@@ -1,0 +1,11 @@
+.progress-bar-fill {
+    background-color: rgb(76, 175, 80);
+}
+
+#VisualElement > VisualElement > #VisualElement > #GoalBar > #unity-progress-bar {
+    background-color: rgb(247, 61, 233);
+}
+
+#VisualElement > VisualElement > #VisualElement > #GoalBar > #unity-progress-bar > .unity-progress-bar__background > .unity-progress-bar__title-container {
+    background-color: rgb(43, 3, 53);
+}

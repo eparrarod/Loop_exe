@@ -75,12 +75,12 @@ public class RobotMovement : MonoBehaviour{
         switch (dir) {
             case 0: //NE
                 Debug.Log("NE");
-                Debug.Log($"BIpos -;{position}");
-                if (position.y < rows - 1 && position.x > 0) {
+                Debug.Log($"BIpos ;{position}");
+                if (position.y < rows - 1 && position.x < cols - 1) {
                     position.x = position.x + 1;
                     position.y = position.y + 1;
                 }
-                Debug.Log($"AIpos -;{position}");
+                Debug.Log($"AIpos ;{position}");
                 break;
             case 1: //SE
                 Debug.Log("SE");

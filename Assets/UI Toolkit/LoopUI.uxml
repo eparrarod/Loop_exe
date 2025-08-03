@@ -1,7 +1,16 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/stylesheet.uss?fileID=7433441132597879392&amp;guid=7b90bdd81f46d43aa997a3999a7bcb42&amp;type=3#stylesheet" />
+    <Style src="project://database/Assets/Progress.uss?fileID=7433441132597879392&amp;guid=58ef1cd96d2cc4fc693587be0d491089&amp;type=3#Progress" />
     <engine:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(255, 255, 255, 0); background-image: none;">
-        <engine:VisualElement style="flex-grow: 1; flex-basis: 75%;" />
+        <engine:VisualElement style="flex-grow: 0; flex-basis: 75%;">
+            <engine:VisualElement name="VisualElement" style="flex-grow: initial; flex-shrink: initial; background-color: rgba(0, 0, 0, 0); background-size: 100% 100%; background-position-x: center 0; background-position-y: center 0; -unity-background-scale-mode: stretch-to-fill; flex-direction: row; left: 3%; top: 6%; right: 5%; bottom: 5%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
+                <engine:Label text="Data Packets" style="-unity-font-style: bold; font-size: 18px;" />
+                <engine:ProgressBar value="2" high-value="4" name="GoalBar" style="border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); background-color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgba(255, 255, 255, 0); flex-basis: 20%; background-size: 100% 100%; display: flex; visibility: visible; background-image: none;" />
+                <engine:VisualElement style="flex-grow: 1; flex-basis: 20%;" />
+                <engine:VisualElement style="flex-grow: 1; flex-basis: 20%;" />
+            </engine:VisualElement>
+            <engine:VisualElement style="flex-grow: 1;" />
+        </engine:VisualElement>
         <engine:VisualElement style="flex-grow: 1; align-items: center; flex-basis: 20%; flex-direction: row; justify-content: space-between;">
             <engine:VisualElement style="flex-grow: 1; flex-basis: 70%;" />
             <engine:VisualElement style="flex-grow: 1; flex-basis: 30%; flex-direction: row; flex-wrap: nowrap; align-items: center; align-self: center; justify-content: space-evenly; font-size: 50%; -unity-text-align: middle-center; height: 40px; align-content: center;">
