@@ -18,6 +18,9 @@ public class ExeBox : MonoBehaviour {
     public GameObject baseLine;
     float heightPerLine;
 
+    //
+    private bool closed = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         if (singleton == null) {
@@ -48,11 +51,19 @@ public class ExeBox : MonoBehaviour {
     }
 
     public void addCommand(string type) {
-        if (commandsRaw.Count < 15) {
-            string commandFull = commandMap.GetValueOrDefault(type, $"{type} times");
+        if (commandsRaw.Count < 14) {
+            if (closed) {
+                Destroy(commands[commands.Count - 1]);
+                closed = false;
+            }
+            string commandFull = commandMap.GetValueOrDefault(type, $"{type} time");
             // Add Number to the right of repeat
             bool number = int.TryParse(type, out int result);
             if (number && commandsRaw.Count > 0) {
+                if (result > 1) {
+                    Debug.Log(">1");
+                    commandFull = $"{commandFull}s";
+                }
                 string lastCommand = commandsRaw[commandsRaw.Count - 1];
                 if (lastCommand.Equals("Repeat")) {
                     commandFull = $"Repeat {commandFull}";
@@ -69,15 +80,24 @@ public class ExeBox : MonoBehaviour {
             }
 
             if (!number) {
-                Vector3 position = baseLine.transform.position;
-                position.y = position.y - (heightPerLine * (commandsRaw.Count + 1));
-                GameObject newCommandLine = Instantiate(baseLine, transform);
-                newCommandLine.transform.position = position;
-                newCommandLine.GetComponentInChildren<TMP_Text>().text = commandFull;
-                commands.Add(newCommandLine);
+                addCommandBox(commandFull);
             }
             commandsRaw.Add(commandFull);
         }
+    }
+
+    public void closeLoop() {
+        closed = true;
+        addCommandBox("}");
+    }
+
+    public void addCommandBox(string text) {
+        Vector3 position = baseLine.transform.position;
+        position.y = position.y - (heightPerLine * (commandsRaw.Count + 1));
+        GameObject newCommandLine = Instantiate(baseLine, transform);
+        newCommandLine.transform.position = position;
+        newCommandLine.GetComponentInChildren<TMP_Text>().text = text;
+        commands.Add(newCommandLine);
     }
 
     public void clearQueue() {
