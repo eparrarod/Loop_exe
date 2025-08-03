@@ -26,7 +26,7 @@ public class NumberType : CommandType{
     }
 
     private void cycleNumber() {
-        number = (number + 1) % 10;
+        number = ((number) % 9 )+ 1;
         base.type = "" + number;
         TMP_Text textLabel = GetComponentInChildren<TMP_Text>();
         textLabel.text = type;
