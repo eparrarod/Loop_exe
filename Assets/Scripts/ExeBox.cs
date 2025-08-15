@@ -106,6 +106,7 @@ public class ExeBox : MonoBehaviour {
             Destroy(line);
         }
         commands = new List<GameObject>();
+        closed = false;
     }
 
 }
