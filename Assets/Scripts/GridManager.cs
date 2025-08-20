@@ -151,7 +151,8 @@ public class GridManager : MonoBehaviour{
             if (pieces.Length == 3) { // repeat with number
                 repeatNextCommand = int.Parse(pieces[1]);
             } else if (pieces.Length == 2) { // number only
-                // Todo: Robot eyes blink that amount of times
+                // TODO: Make Robot eyes blink that amount of times
+                // or face shows that number
 
             } else { // A direction or a repeat without number
                 for (int i = 0 ; i < repeatNextCommand; i++) {
@@ -183,6 +184,7 @@ public class GridManager : MonoBehaviour{
                             movement.moveDiagonal(3);
                             break;
                         case "Repeat" :
+                            repeatNextCommand = 1;
                             break;
                     }
 
