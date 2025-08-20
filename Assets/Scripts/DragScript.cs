@@ -62,5 +62,4 @@ public class DragScript : MonoBehaviour {
         GetComponent<SpriteRenderer>().color = baseC;
         
     }
-
 }
